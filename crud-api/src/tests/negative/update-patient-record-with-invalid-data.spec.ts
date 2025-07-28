@@ -1,20 +1,13 @@
 import {expect, test} from "@playwright/test";
-import {filterData, retrieveData} from "../../utils/filterResponse";
+import {filterData, getErrorMessage, retrieveData, retrieveErrorMessage} from "../../utils/filterResponse";
 import {getLoginCredentials} from "../../utils/get-login-credentials";
-import {filterPatientData, retrievePatientsData} from "../../utils/filter-patients-list-response";
-import {getPatientRecordBody, updatePatientRecordBody} from "../../utils/get-patient-records-body";
+import {getPatientRecordBody, updatePatientRecordBodyWithInvalidData} from "../../utils/get-patient-records-body";
 
 let token : unknown;
 let patientId = 3;
-let patientName = "Lois Lane";
-let patientAge = "34";
-let patientGender = "Female";
-let patientMedicalHistory = "Flu";
-let patientAllergies = "Peanut";
-let patientCurrentMedications = "Amoxicillin";
 const authDetails = getLoginCredentials();
 const patientJsonBody = getPatientRecordBody();
-const updatePatientJsonBody = updatePatientRecordBody();
+const updatePatientJsonBody = updatePatientRecordBodyWithInvalidData();
 test.describe('Update patient/s record from endpoint', () => {
 
     test('should update patient/s record from endpoint', async ({request}) => {
@@ -47,16 +40,11 @@ test.describe('Update patient/s record from endpoint', () => {
             }
         });
 
-        expect(updatePatientResponse.status() === 200);
+        expect(updatePatientResponse.status()).toBe(400);
 
-        const retrievedPatientList = await retrievePatientsData(updatePatientResponse);
-        const patientDetails = filterPatientData(retrievedPatientList);
-        expect(patientDetails[0]).toBe(patientName);
-        expect(patientDetails[1]).toBe(patientAge);
-        expect(patientDetails[2]).toBe(patientGender);
-        expect(patientDetails[3]).toBe(patientMedicalHistory);
-        expect(patientDetails[4]).toBe(patientAllergies);
-        expect(patientDetails[5]).toBe(patientCurrentMedications);
+        const retrievedPatientList = await retrieveErrorMessage(updatePatientResponse);
+        const patientDetails = getErrorMessage(retrievedPatientList);
+        console.log(patientDetails);
 
 
     });

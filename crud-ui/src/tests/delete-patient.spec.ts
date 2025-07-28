@@ -8,7 +8,7 @@ test.describe('Delete Patient details tests', () => {
 
     });
 
-    test('should allow deleting patient detail', async ({dashBoardPage,patientForm}) => {
+    test('should delete patient detail', async ({dashBoardPage,patientForm}) => {
 
         await dashBoardPage.addPatient();
         await patientForm.fillPatientForm(

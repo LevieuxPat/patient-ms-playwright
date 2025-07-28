@@ -17,7 +17,7 @@ test.describe('Testing login endpoint', () => {
             data: authDetails
         });
 
-        expect(loginResponse.status() === 200);
+        expect(loginResponse.status()).toBe(200);
 
         const retrievedData = await retrieveData(loginResponse);
         const loginDetails = filterData(retrievedData);

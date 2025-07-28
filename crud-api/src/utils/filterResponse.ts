@@ -12,6 +12,14 @@ export interface TokenResponse {
 
 }
 
+export interface ErrorResponse {
+    error: string,
+    "details": [
+        string
+    ]
+
+}
+
 export async function retrieveData(
     data: APIResponse,
 ): Promise<TokenResponse> {
@@ -35,6 +43,40 @@ export function filterData(retrievedData: TokenResponse): string[] {
     returnedData.push(role);
     returnedData.push(token);
 
+
+    return returnedData;
+}
+
+export async function retrieveErrorMessage(
+    data: APIResponse,
+): Promise<ErrorResponse> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(data);
+        }, 1000);
+    }).then((result: APIResponse): Promise<ErrorResponse> => result.json());
+}
+
+export function getErrorMessage(retrievedData: ErrorResponse): {} {
+    const returnedData: string[] = [];
+
+    const errorMessage = retrievedData.error;
+    const errorDescription = retrievedData.details[0];
+
+
+    returnedData.push(errorMessage);
+    returnedData.push(errorDescription);
+
+
+    return returnedData;
+}
+
+export function getError404Message(retrievedData: ErrorResponse): {} {
+    const returnedData: string[] = [];
+
+    let errorMessage = retrievedData.error;
+
+    returnedData.push(errorMessage);
 
     return returnedData;
 }

@@ -1,19 +1,19 @@
 import {expect, test} from "@playwright/test";
-import {filterData, retrieveData} from "../../utils/filterResponse";
+import {filterData, getErrorMessage, retrieveData, retrieveErrorMessage} from "../../utils/filterResponse";
 import {getLoginCredentials} from "../../utils/get-login-credentials";
 import {filterPatientData, filterPatientsData, retrievePatientsData} from "../../utils/filter-patients-list-response";
-import {getPatientRecordBody} from "../../utils/get-patient-records-body";
+import {getInvalidPatientRecordBody, getPatientRecordBody} from "../../utils/get-patient-records-body";
 
 let token : unknown;
 
-let patientName = "Lois Lane";
-let patientAge = "32";
+let patientName = "!@#$%^&UI";
+let patientAge = "-1";
 let patientGender = "Female";
 let patientMedicalHistory = "None";
 let patientAllergies = "Peanut";
 let patientCurrentMedications = "Panado";
 const authDetails = getLoginCredentials();
-const patientJsonBody = getPatientRecordBody();
+const patientJsonBody = getInvalidPatientRecordBody();
 test.describe('Add patients record from endpoint', () => {
     test.beforeEach(async ({}) => {
 
@@ -41,16 +41,12 @@ test.describe('Add patients record from endpoint', () => {
             }
         });
 
-        expect(addNewPatientResponse.status()).toBe(201);
+        expect(addNewPatientResponse.status()).toBe(400);
 
-        const retrievedPatientList = await retrievePatientsData(addNewPatientResponse);
-        const patientDetails = filterPatientData(retrievedPatientList);
-        expect(patientDetails[0]).toBe(patientName);
-        expect(patientDetails[1]).toBe(patientAge);
-        expect(patientDetails[2]).toBe(patientGender);
-        expect(patientDetails[3]).toBe(patientMedicalHistory);
-        expect(patientDetails[4]).toBe(patientAllergies);
-        expect(patientDetails[5]).toBe(patientCurrentMedications);
+        const retrievedPatientList = await retrieveErrorMessage(addNewPatientResponse);
+        const patientDetails = getErrorMessage(retrievedPatientList);
+
+        console.log(patientDetails);
 
 
     });

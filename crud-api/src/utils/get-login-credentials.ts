@@ -4,3 +4,10 @@ export function getLoginCredentials(){
         password: 'password123'
     }
 }
+
+export function getInvalidLoginCredentials(){
+    return {
+        email: 'demojjajsjda@example.com',
+        password: 'password123'
+    }
+}

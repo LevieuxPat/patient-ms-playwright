@@ -38,7 +38,7 @@ test.describe('Testing get a single patient record endpoint', () => {
             }
         });
 
-        expect(getPatientsResponse.status() === 200);
+        expect(getPatientsResponse.status()).toBe(201);
 
         const retrievedPatientList = await retrievePatientsData(getPatientsResponse);
         const patientDetails = filterPatientData(retrievedPatientList);

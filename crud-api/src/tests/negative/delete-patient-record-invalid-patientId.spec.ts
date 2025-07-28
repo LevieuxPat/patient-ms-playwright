@@ -1,11 +1,10 @@
 import {expect, test} from "@playwright/test";
-import {filterData, retrieveData} from "../../utils/filterResponse";
+import {filterData, getError404Message, retrieveData, retrieveErrorMessage} from "../../utils/filterResponse";
 import {getLoginCredentials} from "../../utils/get-login-credentials";
-import {filterPatientData, filterPatientsData, retrievePatientsData} from "../../utils/filter-patients-list-response";
-import {getPatientRecordBody, updatePatientRecordBody} from "../../utils/get-patient-records-body";
+import {getPatientRecordBody} from "../../utils/get-patient-records-body";
 
 let token : unknown;
-let patientId = 3;
+let patientId = 85;
 const authDetails = getLoginCredentials();
 const patientJsonBody = getPatientRecordBody();
 test.describe('Delete patient/s record  endpoint', () => {
@@ -44,7 +43,11 @@ test.describe('Delete patient/s record  endpoint', () => {
             }
         });
 
-        expect(updatePatientResponse.status()).toBe(200);
+        expect(updatePatientResponse.status()).toBe(404);
+
+        const retrievedPatientList = await retrieveErrorMessage(updatePatientResponse);
+        const errorMessage = getError404Message(retrievedPatientList);
+        expect(errorMessage[0]).toBe("Patient not found");
 
     });
 

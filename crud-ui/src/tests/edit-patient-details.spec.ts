@@ -8,7 +8,7 @@ test.describe('Edit Patient details tests', () => {
 
     });
 
-    test('should allow editing patient details', async ({dashBoardPage,patientForm}) => {
+    test('should edit patient details', async ({dashBoardPage,patientForm}) => {
 
         await dashBoardPage.addPatient();
         await patientForm.fillPatientForm(
