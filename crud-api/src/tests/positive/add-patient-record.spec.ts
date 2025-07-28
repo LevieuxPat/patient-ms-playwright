@@ -41,6 +41,7 @@ test.describe('Add patients record from endpoint', () => {
             }
         });
 
+        //201 created record
         expect(addNewPatientResponse.status()).toBe(201);
 
         const retrievedPatientList = await retrievePatientsData(addNewPatientResponse);
