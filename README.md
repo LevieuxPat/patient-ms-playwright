@@ -23,7 +23,7 @@ cd your-playwright-project
 
 npm install
 
-3. Install Playwright Browsers
+3. Install Playwright dependencies
 
 npx playwright install
 
@@ -40,6 +40,10 @@ npx playwright test tests/example.spec.ts
 After a test run, you can view the HTML report:
 
 npx playwright show-report
+
+Documentation link :
+
+https://drive.google.com/file/d/1-_lGSlXvr00EnIv9M7IHU6dVDAIiGQip/view?usp=sharing
 
 For Api Swagger docs
 
