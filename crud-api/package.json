@@ -1,0 +1,16 @@
+{
+  "name": "patient-crud-playwright",
+  "version": "1.0.0",
+  "main": "",
+  "keywords": [],
+  "author": "Patient Kankolongo",
+  "license": "ISC",
+  "description": "Testing patients management APIs",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.1.0"
+  }
+}
