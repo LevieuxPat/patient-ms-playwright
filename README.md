@@ -16,7 +16,7 @@ npm -v
 🚀 Getting Started
 1. Clone the Repository
 
-git clone https://github.com/your-username/your-playwright-project.git
+git clone https://github.com/LevieuxPat/patient-ms-playwright.git
 cd your-playwright-project
 
 2. Install Dependencies
