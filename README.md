@@ -36,16 +36,6 @@ Run a Specific Test File
 
 npx playwright test tests/example.spec.ts
 
-📂 Project Structure
-
-.
-├── tests/                  # Test files
-│   └── example.spec.ts
-├── playwright.config.ts    # Playwright configuration
-├── package.json
-├── tsconfig.json           # TypeScript configuration (if using TS)
-└── README.md
-
 📸 Viewing Test Reports
 After a test run, you can view the HTML report:
 
